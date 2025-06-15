@@ -1,0 +1,22 @@
+path:
+  sentences_path: ./datasets/dataset/sentences.txt
+  src_vocab_path: ./datasets/dataset/src_vocab.txt
+  tgt_vocab_path: ./datasets/dataset/tgt_vocab.txt
+# model parameters
+model:
+  d_model: 512
+  n_head: 8
+  d_key: 64
+  d_value: 64
+  d_feedforward: 2048
+  max_len: 5000
+  num_encoder_layers: 6
+  num_decoder_layers: 6
+# train parameters
+train:
+  batch_size: 2
+  epoch: 20
+  learning_rate: 0.001
+  dropout: 0.1
+
+
