@@ -1,7 +1,7 @@
-<s> 我 是 一名 软件 工程师 <p> <p> </s>
-<s> i am a software engineer <p> <p> <p> </s>
-<s> 研究 方向 是 人工 智能 与 云计算 </s>
-<s> research field is artificial intelligence and cloud computing </s>
-<s> 这是 一个 测试 语料集 <p> <p> <p> </s>
-<s> this is a test corpus <p> <p> <p> </s>
+我 是 一名 软件 工程师 <p> <p>
+i am a software engineer <p> <p> <p>
+研究 方向 是 人工 智能 与 云计算
+research field is artificial intelligence and cloud computing
+这是 一个 测试 语料集 <p> <p> <p>
+this is a test corpus <p> <p> <p>
 
