@@ -18,7 +18,7 @@ def load_data(sentences_path, src_vocab_path, tgt_vocab_path):
     for i in range(len(sentences)):
         enc_input = [[src_vocab[j] for j in sentences[i][0].split()]]
         dec_input = [[tgt_vocab[j] for j in sentences[i][1].split()]]
-        dec_output = [[tgt_vocab[j] for j in sentences[i][1].split()]]
+        dec_output = [[tgt_vocab[j] for j in sentences[i][2].split()]]
         enc_inputs.extend(enc_input)
         dec_inputs.extend(dec_input)
         dec_outputs.extend(dec_output)
@@ -39,7 +39,8 @@ def read_sentences_file(sentences_path):
     for i in range(0, len(lines), 2):
         src = lines[i]
         tgt = lines[i + 1]
-        sentences.append([src, tgt])
+        # For decoder input, add <s> at the beginning. For decoder output, add </s> at the end
+        sentences.append([src, '<s> '+tgt, tgt+' </s>'])
 
     return sentences
 
