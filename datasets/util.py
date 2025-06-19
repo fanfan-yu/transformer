@@ -23,14 +23,17 @@ def load_data(sentences_path, src_vocab_path, tgt_vocab_path):
         dec_inputs.extend(dec_input)
         dec_outputs.extend(dec_output)
 
-    torch.LongTensor(dec_inputs)
-    return torch.LongTensor(enc_inputs), torch.LongTensor(dec_inputs), torch.LongTensor(dec_outputs), len(src_vocab), len(tgt_vocab)
+    tgt_len = len(sentences[0][1].split(" "))
+    return torch.LongTensor(enc_inputs), torch.LongTensor(dec_inputs), torch.LongTensor(dec_outputs), len(src_vocab), len(tgt_vocab), tgt_len
 
 # read sentences from dataset directory
 def read_sentences_file(sentences_path):
     sentences = []
     with open(sentences_path, 'r', encoding='utf-8') as f:
         lines = [line.strip() for line in f.readlines() if line.strip()]
+
+    if len(lines) == 0:
+        raise ValueError("data file is empty")
 
     # check if the number of lines is even
     if len(lines) % 2 != 0:

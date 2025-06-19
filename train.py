@@ -2,10 +2,11 @@ import torch
 import torch.optim as optim
 from torch import nn
 from torch.utils import data as Data
+
+from config.config import load_config
 from datasets.dataset import Dataset
 from datasets.util import load_data
 import logging
-import yaml
 from models.model.transformer import Transformer
 
 logging.basicConfig(
@@ -14,34 +15,11 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()] # default print to console
 )
 
-class config():
-    def __init__(self, configMap):
-        self.sentences_path = configMap["path"]["sentences_path"]
-        self.src_vocab_path = configMap["path"]["src_vocab_path"]
-        self.tgt_vocab_path = configMap["path"]["tgt_vocab_path"]
-        self.d_model = configMap["model"]["d_model"]
-        self.n_head = configMap["model"]["n_head"]
-        self.d_key = configMap["model"]["d_key"]
-        self.d_value = configMap["model"]["d_value"]
-        self.d_feedforward = configMap["model"]["d_feedforward"]
-        self.max_len = configMap["model"]["max_len"]
-        self.num_encoder_layers = configMap["model"]["num_encoder_layers"]
-        self.num_decoder_layers = configMap["model"]["num_decoder_layers"]
-        self.batch_size = configMap["train"]["batch_size"]
-        self.epoch = configMap["train"]["epoch"]
-        self.learning_rate = configMap["train"]["learning_rate"]
-        self.dropout = configMap["train"]["dropout"]
-
-def load_config(config_path):
-    with open(config_path, 'r', encoding='utf-8') as f:
-        configMap = yaml.safe_load(f)
-    return config(configMap)
-
 if __name__ == '__main__':
     logging.info('Loading config...')
     config = load_config("config/config.yaml")
 
-    enc_inputs, dec_inputs, tgt_outputs, src_vocab_size, tgt_vocab_size = load_data(config.sentences_path, config.src_vocab_path, config.tgt_vocab_path)
+    enc_inputs, dec_inputs, tgt_outputs, src_vocab_size, tgt_vocab_size, _ = load_data(config.sentences_path, config.src_vocab_path, config.tgt_vocab_path)
 
     loader = Data.DataLoader(Dataset(enc_inputs, dec_inputs, tgt_outputs), config.batch_size, True)
 
